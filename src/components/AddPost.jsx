@@ -34,7 +34,7 @@ const AddPost = ({ onAddPost }) => {
                     size={50}
                     value={body}
                     onChange={(event) => setBody(event.target.value)}
-                    placeholder="Post content/ body"
+                    placeholder="Post's content / body"
                 /> <br />
                 <button type="submit">Submit</button>
             </form>

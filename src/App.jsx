@@ -61,7 +61,6 @@ const App = () => {
     }
   }
 
-
   // Reading Operation - Read all the post from the server
   useEffect(() => {
     const fetchPosts = async () => {
