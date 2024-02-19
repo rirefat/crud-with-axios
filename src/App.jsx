@@ -3,7 +3,6 @@ import './App.css';
 import AddPost from './components/AddPost';
 import Posts from './components/Posts';
 import EditPost from './components/EditPost';
-import axios from 'axios';
 import api from './api/api';
 
 const App = () => {
