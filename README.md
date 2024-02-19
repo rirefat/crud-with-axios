@@ -7,6 +7,10 @@ Please follow the below instructions to run this branch in your machine:
    ```sh
    git clone https://github.com/rirefat/crud-with-axios
    ```
+2. Switch branch(request-config) -
+   ```sh
+   git checkout request-config
+   ```
 3. Just run this command to install node dependencies
    ```sh
    npm i
