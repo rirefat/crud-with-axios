@@ -10,6 +10,23 @@ const App = () => {
   const [editPost, setEditPost] = useState(null);
   const [error, setError] = useState(null);
 
+  const handleAddPost = async (newPost) => {
+    try {
+      const id = posts.length
+        ? Number(posts[posts.length - 1].id) + 1
+        : 1;
+
+      const finalPost = {
+        id: id.toString(),
+        ...newPost
+      }
+      const response = await axios.post("http://localhost:5000/posts", finalPost);
+      setPosts([...posts, response.data])
+    } catch (err) {
+      setError(err.message);
+    }
+  }
+
   const handleEdit = (post) => {
     setEditPost(post);
   }
@@ -19,14 +36,16 @@ const App = () => {
 
     if (userResponse) {
       try {
-        await axios.delete(`http://localhost:5000/posts/${postId}`)
+        await axios.delete(`http://localhost:5000/posts/${postId}`);
+        const newPosts = posts.filter((post) => post.id !== postId);
+        setPosts(newPosts);
       }
       catch (err) {
         setError(err.message)
       }
     }
   }
-  
+
   useEffect(() => {
     const fetchPosts = async () => {
       try {
@@ -58,7 +77,7 @@ const App = () => {
 
       <>
         {
-          (editPost) ? <EditPost post={editPost} /> : <AddPost />
+          (editPost) ? <EditPost post={editPost} /> : <AddPost onAddPost={handleAddPost} />
         }
       </>
 
