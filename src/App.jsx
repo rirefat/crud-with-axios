@@ -10,6 +10,7 @@ const App = () => {
   const [editPost, setEditPost] = useState(null);
   const [error, setError] = useState(null);
 
+  // Create Operation - Create a single post and send it to the server
   const handleAddPost = async (newPost) => {
     try {
       const id = posts.length
@@ -27,10 +28,24 @@ const App = () => {
     }
   }
 
+  // Update Operation - Edit a single post and update it to the server also
   const handleEdit = (post) => {
     setEditPost(post);
   }
+  const handleUpdatePost = async (updatedPost) => {
+    try {
+      const response = await axios.patch(`http://localhost:5000/posts/${updatedPost.id}`, updatedPost);
+      const updatedPosts = posts.map(post =>
+        post.id === response.data.id ? response.data : post
+      );
+      setPosts(updatedPosts);
 
+    } catch (err) {
+      setError(err.message);
+    }
+  }
+
+  // Delete Operation - Delete a single post from the server
   const handleDelete = async (postId) => {
     let userResponse = confirm("Are you confirm to delete the post?");
 
@@ -46,6 +61,8 @@ const App = () => {
     }
   }
 
+
+  // Reading Operation - Read all the post from the server
   useEffect(() => {
     const fetchPosts = async () => {
       try {
@@ -58,6 +75,7 @@ const App = () => {
       }
     }
 
+    // calling fetchPost function
     fetchPosts();
   }, [])
 
@@ -77,7 +95,7 @@ const App = () => {
 
       <>
         {
-          (editPost) ? <EditPost post={editPost} /> : <AddPost onAddPost={handleAddPost} />
+          (editPost) ? <EditPost post={editPost} onUpdatePost={handleUpdatePost} /> : <AddPost onAddPost={handleAddPost} />
         }
       </>
 
