@@ -4,6 +4,7 @@ import AddPost from './components/AddPost';
 import Posts from './components/Posts';
 import EditPost from './components/EditPost';
 import axios from 'axios';
+import api from './api/api';
 
 const App = () => {
   const [posts, setPosts] = useState([]);
@@ -21,7 +22,7 @@ const App = () => {
         id: id.toString(),
         ...newPost
       }
-      const response = await axios.post("http://localhost:5000/posts", finalPost);
+      const response = await api.post("posts", finalPost);
       setPosts([...posts, response.data])
     } catch (err) {
       setError(err.message);
@@ -34,7 +35,7 @@ const App = () => {
   }
   const handleUpdatePost = async (updatedPost) => {
     try {
-      const response = await axios.patch(`http://localhost:5000/posts/${updatedPost.id}`, updatedPost);
+      const response = await api.patch(`posts/${updatedPost.id}`, updatedPost);
       const updatedPosts = posts.map(post =>
         post.id === response.data.id ? response.data : post
       );
@@ -51,7 +52,7 @@ const App = () => {
 
     if (userResponse) {
       try {
-        await axios.delete(`http://localhost:5000/posts/${postId}`);
+        await api.delete(`posts/${postId}`);
         const newPosts = posts.filter((post) => post.id !== postId);
         setPosts(newPosts);
       }
@@ -65,7 +66,7 @@ const App = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/posts");
+        const response = await api.get("posts");
         if (response && response.data) {
           setPosts(response.data)
         }
