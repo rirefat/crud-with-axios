@@ -1,11 +1,6 @@
 {
   "posts": [
     {
-      "id": "2",
-      "title": "Lorem Ipsum dolor",
-      "body": "est rerum tempore vitae\nsequi sint nihil reprehenderit dolor beatae ea dolores neque\nfugiat blanditiis voluptate porro vel nihil molestiae ut reiciendis\nqui aperiam non debitis possimus qui neque nisi nulla"
-    },
-    {
       "id": "5",
       "title": "Learning React JS",
       "body": "bodyrrrr"
@@ -13,6 +8,11 @@
     {
       "id": "6",
       "title": "Learning Modern JS",
+      "body": "Post Body"
+    },
+    {
+      "id": "7",
+      "title": "Learning HTML Basics",
       "body": "Post Body"
     }
   ]
